@@ -11,12 +11,12 @@ get '/decks/new' do
 end
 
 get '/decks/:deck_id' do
-  @deck = Deck.where(id: params[:deck_id])[0]
+  @deck = Deck.find(params[:deck_id])
   erb :'/deck_views/show'
 end
 
 get '/decks/edit/:deck_id' do
-  @deck = Deck.where(id: params[:deck_id])
+  @deck = Deck.find(params[:deck_id])
   erb :'/deck_views/edit'
 end
 
@@ -31,7 +31,7 @@ post '/decks/edit/:deck_id' do
 end
 
 post '/decks/:deck_id/delete' do
-	@deck = Deck.where(id: params[:deck_id])
+	@deck = Deck.find(params[:deck_id])
 	@deck.destroy
 	redirect to "/users/#{current_user.id}/decks"
 end
