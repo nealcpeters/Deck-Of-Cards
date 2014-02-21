@@ -33,3 +33,20 @@ post '/user/new' do
   	erb :"/user/new"
   end
 end
+
+post '/user/sign_out' do
+  session[:user_id] = nil
+  redirect to('/')
+end
+
+post '/user/sign_in' do
+  user = User.find_by_email(params[:email])
+
+  if user && user.authenticate(params[:password])
+    session[:user_id] = user.id
+    redirect_to("/user/#{user.id}")
+  else
+    @errors = user.errors.messages
+    erb :"/user_views/sign_in"
+  end
+end
