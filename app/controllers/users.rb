@@ -1,5 +1,5 @@
 get '/user/new' do
-	
+
 end
 
 get '/user/:id' do 
