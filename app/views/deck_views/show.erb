@@ -1,1 +1,20 @@
+Author: <a href=""><%= @deck.user.email %></a>
+
 <h1><%= @deck.title %></h1>
+
+<div class="row">
+  <% @deck.cards.each do |card| %>
+    <div class="col-xs-6 col-md-3 thumbnail">
+      <p><%= card.definition %></p>
+      <form>
+        <input style="display: none;" type="text" name="card_id" value="<%= card.id %>"></input>
+        <input type="text" name="answer"></input>
+        <input type="submit" value="Enter" class="btn btn-primary"></input>
+      </form>
+    </div>
+  <% end %>
+</div>
+
+
+
+
