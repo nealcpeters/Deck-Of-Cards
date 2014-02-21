@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
   has_secure_password
   has_many :decks
+  has_many :answers
+  has_many :rounds, through: :answers
   has_many :cards, through: :decks
-  has_many :answers, through: :decks, through: :cards
 
 
   validates :email, presence: true, uniqueness: true
