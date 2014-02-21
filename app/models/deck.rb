@@ -1,7 +1,8 @@
 class Deck < ActiveRecord::Base
-  belongs_to :user, through: :cards, through: :answers
   has_many :cards
+  belongs_to :user
 
   validates :title, presence: true
   validates :description, presence: true
+  validates_presence_of :user_id
 end
