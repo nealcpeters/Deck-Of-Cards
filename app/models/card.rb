@@ -1,3 +1,4 @@
 class Card < ActiveRecord::Base
-  # Remember to create a migration!
+  validates :term, presence: true, uniqueness: true
+  validates :definition, presence: true, uniqueness: true
 end
