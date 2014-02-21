@@ -6,7 +6,7 @@
 	<%if current_user.decks.any?%>
 		<%current_user.decks.each do |deck|%>
 			<%=deck.title%>
-			<a href="/decks/<%=deck.id%>">Edit</a>
+			<a href="/decks/edit/<%=deck.id%>">Edit</a>
 			<a href="/decks/<%=deck.id%>/delete">Delete</a>
 		<%end%>
 	<%end%>

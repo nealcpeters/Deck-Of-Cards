@@ -1,3 +1,6 @@
+require 'pry'
+require 'pry-nav'
+
 get '/user/:user_id/decks' do
   @decks = current_user.decks
   erb :'/deck_views/index'
@@ -8,16 +11,26 @@ get '/decks/new' do
 end
 
 post '/decks' do
-  deck = Deck.create(params[:deck])
-  redirect to "/decks/#{deck.id}"
+	binding.pry
+  @deck = Deck.create(params[:deck])
+  redirect to "/decks/#{@deck.id}"
+end
+
+get '/decks' do
+	redirect to "/decks/#{deck.id}"
 end
 
 get '/decks/:deck_id' do
+	
+end
+
+
+get '/decks/edit/:deck_id' do
   @deck = Deck.where(id: params[:deck_id])
   erb :'deck_views/edit'
 end
 
-post '/decks/:deck_id' do
+post '/decks/edit/:deck_id' do
   Card.create(params[:card])
   redirect to "/decks/#{params[:deck_id]}"
 end
