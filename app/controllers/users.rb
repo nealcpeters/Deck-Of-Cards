@@ -1,15 +1,15 @@
 get '/user/new' do
-  
-  erb :"/user/new"
+
+  erb :"user_views/new"
 end
 
 get '/user/sign_in' do
-  
-  erb :"user_views/sign_in"
-end 
 
-get '/user/:id' do 
-  
+  erb :"user_views/sign_in"
+end
+
+get '/user/:id' do
+
   erb :"user_views/show"
 end
 
@@ -19,7 +19,7 @@ get '/user/edit/:id' do
 end
 
 post '/user/new' do
-  
+
   user = User.new({
   	email: params[:email],
   	password: params[:password],
