@@ -10,20 +10,19 @@ get '/decks/new' do
 	erb :'/deck_views/new'
 end
 
-post '/decks' do
-  @deck = Deck.create(params[:deck])
-  redirect to "/decks/edit/#{@deck.id}/"
-end
-
 get '/decks/:deck_id' do
-	@deck = Deck.where(id: params[:deck_id])
-	erb :'/deck_views/show'
+  @deck = Deck.where(id: params[:deck_id])[0]
+  erb :'/deck_views/show'
 end
-
 
 get '/decks/edit/:deck_id' do
   @deck = Deck.where(id: params[:deck_id])
   erb :'/deck_views/edit'
+end
+
+post '/decks' do
+  @deck = Deck.create(params[:deck])
+  redirect to "/decks/edit/#{@deck.id}/"
 end
 
 post '/decks/edit/:deck_id' do

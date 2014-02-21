@@ -5,11 +5,10 @@ require 'faker'
   User.create(email: Faker::Internet.email, password: password, password_confirmation: password)
 end
 
-i = 0
-
-10.times do
-  i += 1
-  Deck.create(title: Faker::Lorem.word, description: Faker::Company.catch_phrase, user_id: i)
+User.all.each do |user|
+  5.times do
+    Deck.create(title: Faker::Lorem.word, description: Faker::Company.catch_phrase, user_id: user.id)
+  end
 end
 
 Deck.all.each do |deck|
