@@ -1,1 +1,21 @@
-EDIT THIS DECK NOW
+<div class="page-header">
+  <h1>Edit Your Deck<small>Add new cards, do whateva you WANT okay?!:</small></h1>
+</div>
+
+
+<form id="create_card" action="/" method="POST">
+
+  <div class="input-group input-group-lg">
+    <span class="input-group-addon">Title:</span>
+    <input type="text" class="form-control" placeholder="Title" name="deck[title]">
+  </div>
+
+  <div class="input-group input-group-lg">
+    <span class="input-group-addon">Description:</span>
+    <textarea form="create_deck" name="deck[description]" rows="10" cols="50"></textarea>
+  </div>
+
+  <input type="hidden" name="card[deck_id]" value="<%=@deck.id%>">
+
+  <input type="submit" value="Make Your Deck" class="btn default navbar-btn">
+</form>

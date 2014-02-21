@@ -12,27 +12,23 @@ end
 
 post '/decks' do
   @deck = Deck.create(params[:deck])
-  binding.pry
-  redirect to "/decks/#{@deck.id}"
-end
-
-get '/decks' do
-	redirect to "/decks/#{deck.id}"
+  redirect to "/decks/edit/#{@deck.id}/"
 end
 
 get '/decks/:deck_id' do
-	erb :'deck_views/show'
+	@deck = Deck.where(id: params[:deck_id])
+	erb :'/deck_views/show'
 end
 
 
 get '/decks/edit/:deck_id' do
   @deck = Deck.where(id: params[:deck_id])
-  erb :'deck_views/edit'
+  erb :'/deck_views/edit'
 end
 
 post '/decks/edit/:deck_id' do
   Card.create(params[:card])
-  redirect to "/decks/#{params[:deck_id]}"
+  redirect to "/decks/edit/#{params[:deck_id]}"
 end
 
 post '/decks/:deck_id/delete' do

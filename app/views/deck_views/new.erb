@@ -14,7 +14,7 @@
     <textarea form="create_deck" name="deck[description]" rows="10" cols="50"></textarea>
   </div>
 
-  <form type="hidden" name="deck[:user_id]" value="<%=current_user.id%>">
+  <input type="hidden" name="deck[user_id]" value="<%=current_user.id%>">
 
   <input type="submit" value="Make Your Deck" class="btn default navbar-btn">
 </form>
