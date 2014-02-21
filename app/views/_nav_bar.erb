@@ -8,11 +8,9 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <% if current_user? %>
-        <a class="navbar-brand" href="/user/<%= session[:user_id] %>">Flashcards</a>
-      <% else %>
+
         <a class="navbar-brand" href="/">Flashcards</a>
-      <% end %>
+
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -23,8 +21,15 @@
 
       <ul class="nav navbar-nav navbar-right">
         <% if current_user? %>
-          <li><a href="/user/edit/<%= current_user.id %>"><%= current_user.email %></a></li>
-          <li><a href="/user/sign_out">Log Out</a></li>
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=current_user.email %><b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="/user/<%= current_user.id%>">Home</a></li>
+            <li><a href="/user/edit/<%= current_user.id%>">Edit</a></li>
+            <li class="divider"></li>
+            <li><a href="/user/sign_out">Log Out</a></li>
+          </ul>
+        </li>
         <% else %>
           <li><a href="/user/sign_in">Log In</a></li>
         <% end %>
