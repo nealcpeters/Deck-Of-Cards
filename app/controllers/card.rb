@@ -2,6 +2,7 @@
 post '/card_added' do
 
 	card = Card.create(params[:card])
-	redirect to 
+	@deck = card.deck
+	erb :'deck/add_cards'
 end
 
