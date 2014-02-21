@@ -2,10 +2,14 @@
   <h1>Example page header <small>Subtext for header</small></h1>
 </div>
 
+<div class="my-decks">
+  <a href="/users/<%= current_user.id %>/decks">View my decks</a>
+</div>
+
 <div class="row">
   <% Deck.all.each do |deck| %>
     <div class="col-xs-6 col-md-3">
-      <a href="#" class="thumbnail">
+      <a href="/" class="thumbnail">
         <h2><%= deck.title %></h2>
       </a>
     </div>
