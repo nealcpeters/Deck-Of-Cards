@@ -8,7 +8,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">Flashcards</a>
+      <% if current_user? %>
+        <a class="navbar-brand" href="/user/<%= session[:user_id] %>">Flashcards</a>
+      <% else %>
+        <a class="navbar-brand" href="/">Flashcards</a>
+      <% end %>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
