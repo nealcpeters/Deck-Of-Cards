@@ -2,20 +2,33 @@
   <h1>Edit Your Deck<small>Add new cards, do whateva you WANT okay?!:</small></h1>
 </div>
 
+<div id="existing_cards">
+	<%if @deck.cards.any?%>
+		<%@deck.cards.each do |card|%>
+			<%=card.term%>
+			<%=card.definition%>
+			<a href="/cards/<%=card.id%>/edit">Edit</a>
+			<a href="/cards/<%=card.id%>/delete">Delete</a>
+		<%end%>
+	<%end%>
+</div>
 
-<form id="create_card" action="/" method="POST">
 
-  <div class="input-group input-group-lg">
-    <span class="input-group-addon">Title:</span>
-    <input type="text" class="form-control" placeholder="Title" name="deck[title]">
-  </div>
+<div>
+	<form id="create_card" action="/decks/edit/<%=@deck.id%>" method="POST">
 
-  <div class="input-group input-group-lg">
-    <span class="input-group-addon">Description:</span>
-    <textarea form="create_deck" name="deck[description]" rows="10" cols="50"></textarea>
-  </div>
+	  <div class="input-group input-group-lg">
+	    <span class="input-group-addon">Term:</span>
+	    <input type="text" class="form-control" placeholder="Term" name="card[term]">
+	  </div>
 
-  <input type="hidden" name="card[deck_id]" value="<%=@deck.id%>">
+	  <div class="input-group input-group-lg">
+	    <span class="input-group-addon">Description:</span>
+	    <textarea form="create_card" name="card[definition]" rows="10" cols="50"></textarea>
+	  </div>
 
-  <input type="submit" value="Make Your Deck" class="btn default navbar-btn">
-</form>
+	  <input type="hidden" name="card[deck_id]" value="<%=@deck.id%>">
+
+	  <input type="submit" value="Make Your Card" class="btn default navbar-btn">
+	</form>
+</div>
