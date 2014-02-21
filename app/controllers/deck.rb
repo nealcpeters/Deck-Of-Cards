@@ -20,7 +20,6 @@ get '/decks/:deck_id' do
 	erb :'/deck_views/show'
 end
 
-
 get '/decks/edit/:deck_id' do
   @deck = Deck.where(id: params[:deck_id])
   erb :'/deck_views/edit'
