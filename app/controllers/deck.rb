@@ -11,7 +11,6 @@ get '/decks/new' do
 end
 
 post '/decks' do
-	binding.pry
   @deck = Deck.create(params[:deck])
   redirect to "/decks/#{@deck.id}"
 end
@@ -21,7 +20,7 @@ get '/decks' do
 end
 
 get '/decks/:deck_id' do
-	
+	erb :'deck_views/show'
 end
 
 
