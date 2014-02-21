@@ -1,13 +1,18 @@
 <div class="page-header">
-  <h1>Welcome, <%=@user.name%>!<small>Here are all of the decks that you have created:</small></h1>
+  <h1>Welcome, <%=current_user.email%>!<small>Here are all of the decks that you have created:</small></h1>
 </div>
 
 <div id="my_decks">
-	<%if @user.Decks.any?%>
-		<%@user.decks.each do |deck|%>
+	<%if current_user.decks.any?%>
+		<%current_user.decks.each do |deck|%>
 			<%=deck.title%>
 			<a href="/decks/<%=deck.id%>">Edit</a>
 			<a href="/decks/<%=deck.id%>/delete">Delete</a>
 		<%end%>
 	<%end%>
+</div>
+
+
+<div>
+	<a href="/decks/new">Create a New Deck</a>
 </div>
