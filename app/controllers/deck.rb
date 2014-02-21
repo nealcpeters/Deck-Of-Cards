@@ -1,9 +1,9 @@
 get '/users/:user_id/decks' do
-  erb :'/deck/my_decks'
+  erb :'/deck_views/my_decks'
 end
 
 get '/decks/new' do
-	erb :'/deck/new'
+	erb :'/deck_views/new'
 end
 
 post '/decks' do
@@ -18,5 +18,5 @@ end
 
 get '/decks/:deck_id/edit' do
 	@deck = Deck.where(id: params[:deck_id])
-	erb :'deck/edit_deck'
+	erb :'deck_views/edit'
 end
