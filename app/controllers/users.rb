@@ -8,7 +8,6 @@ get '/user/sign_in' do
   erb :"user_views/sign_in"
 end
 
-
 get '/user/sign_out' do
   p session
   session[:user_id] = nil
@@ -36,7 +35,7 @@ post '/user/new' do
     session[:user_id] = user.id
     redirect to("/user/#{user.id}")
   else
-    @errors = user.errors.messages
+    p @errors = user.errors.messages
     erb :"user_views/new"
   end
 end
@@ -48,7 +47,7 @@ post '/user/sign_in' do
     session[:user_id] = user.id
     redirect to("/user/#{user.id}")
   else
-    @errors = user.errors.messages
+    @errors = {:Invalid=>["Incorrect Login"]}
     erb :"user_views/sign_in"
   end
 end
