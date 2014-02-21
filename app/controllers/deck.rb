@@ -1,5 +1,6 @@
-get '/users/:user_id/decks' do
-  erb :'/deck_views/my_decks'
+get '/user/:user_id/decks' do
+  @decks = current_user.decks
+  erb :'/deck_views/index'
 end
 
 get '/decks/new' do
@@ -7,16 +8,22 @@ get '/decks/new' do
 end
 
 post '/decks' do
-	deck = Deck.create(params[:deck])
-	redirect to "/edit_deck/#{deck.id}"
+  deck = Deck.create(params[:deck])
+  redirect to "/decks/#{deck.id}"
 end
 
-post '/decks/:deck_id/edit' do
-	Card.create(params[:card])
-	redirect to "/deck/#{params[:deck_id]}/edit"
+get '/decks/:deck_id' do
+  @deck = Deck.where(id: params[:deck_id])
+  erb :'deck_views/edit'
 end
 
-get '/decks/:deck_id/edit' do
+post '/decks/:deck_id' do
+  Card.create(params[:card])
+  redirect to "/decks/#{params[:deck_id]}"
+end
+
+post '/decks/:deck_id/delete' do
 	@deck = Deck.where(id: params[:deck_id])
-	erb :'deck_views/edit'
+	@deck.destroy
+	redirect to "/users/#{current_user.id}/decks"
 end
