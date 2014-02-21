@@ -12,6 +12,7 @@ end
 
 post '/decks' do
   @deck = Deck.create(params[:deck])
+  binding.pry
   redirect to "/decks/#{@deck.id}"
 end
 
