@@ -4,9 +4,9 @@ Author: <a href=""><%= @deck.user.email %></a>
 
 <div class="row">
   <% @deck.cards.each do |card| %>
-    <div class="col-xs-6 col-md-3 thumbnail">
+    <div class="col-xs-6 col-md-3 thumbnail" id="card-<%= card.id %>">
       <p><%= card.definition %></p>
-      <form>
+      <form class="card-check-form" action="/cards/<%= card.id %>/check" method="POST">
         <input style="display: none;" type="text" name="card_id" value="<%= card.id %>"></input>
         <input type="text" name="answer"></input>
         <input type="submit" value="Enter" class="btn btn-primary"></input>
@@ -14,6 +14,36 @@ Author: <a href=""><%= @deck.user.email %></a>
     </div>
   <% end %>
 </div>
+
+<script type="text/javascript">
+  $(".card-check-form").on("submit", function(e) {
+    e.preventDefault();
+
+    var url = $(this).attr("action");
+    var data = $(this).serialize();
+
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: data,
+      dataType: "json",
+      success: function(response){
+        if(response.value === true) {
+          $("#card-" + response.card_id).css("background", "rgb(95, 183, 87)");
+        }
+        else {
+          $("#card-" + response.card_id).css("background", "rgb(215, 85, 76)");
+        }
+      }
+    });
+
+    // $.post(url, data, function(serverResponse, status, request){
+    //   console.log(serverResponse)
+    // }).done(){
+
+    // }
+  });
+</script>
 
 
 

@@ -17,14 +17,4 @@ Deck.all.each do |deck|
   end
 end
 
-10.times do
-  Round.create
-end
-
-Round.all.each do |round|
-  10.times do
-    Answer.create(user_id: (rand(25) + 1), card_id: (rand(25) + 1), round_id: round.id, result: rand(2))
-  end
-end
-
 
