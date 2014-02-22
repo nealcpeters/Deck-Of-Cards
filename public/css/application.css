@@ -1,6 +1,6 @@
 body {
 
-  background-color: white;
+  background-color: #F2F2F2;
 }
 
 .container {
@@ -39,3 +39,41 @@ th {
   color: #444;
 }
 
+.deck-results a {
+  background: #E6E6E6;
+}
+
+.navbar-default {
+  background-color: rgb(161, 161, 161);
+  border-color: #989898;
+  border-radius: 0;
+  box-shadow: 10px 10px 5px #888888;
+}
+
+.navbar-default .navbar-brand {
+  color: white;
+  letter-spacing: 2px;
+  font-weight: lighter;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: white;
+  letter-spacing: 2px;
+  font-weight: lighter;
+}
+
+.dropdown-menu > li > a:hover {
+  background-color: #428bca;
+}
+
+.card-false {
+  background-color: rgb(215, 85, 76);
+}
+
+.card-true {
+  background-color: rgb(95, 183, 87);
+}
+
+.card-not-answered {
+  background-color: #E6E6E6;
+}

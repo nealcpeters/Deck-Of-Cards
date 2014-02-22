@@ -2,21 +2,13 @@ Author: <a href=""><%= @deck.user.email %></a>
 
 <h1><%= @deck.title %></h1>
 
-<div class="row">
-  <% @deck.cards.each do |card| %>
-    <div class="col-xs-6 col-md-3 thumbnail" id="card-<%= card.id %>">
-      <p><%= card.definition %></p>
-      <% if card.answered?(@user, session[:round_id]) %>
-        <form id="card-form-<%= card.id %>" class="card-check-form" action="/cards/<%= card.id %>/check" method="POST">
-          <input style="display: none;" type="text" name="card_id" value="<%= card.id %>"></input>
-          <input type="text" name="answer"></input>
-          <input type="submit" value="Enter" class="btn btn-primary"></input>
-        </form>
-      <% else %>
-      <% end %>
-    </div>
-  <% end %>
+<%= erb :"deck_views/_deck_cards" %>
+
+<div class="progress progress-striped active">
+  <%= erb :"deck_views/_deck_progress_bar" %>
 </div>
+
+<p id="deck-id-hidden" style="display: none;"><%= @deck.id %></p>
 
 <script type="text/javascript">
   $(".card-check-form").on("submit", function(e) {
@@ -24,6 +16,22 @@ Author: <a href=""><%= @deck.user.email %></a>
 
     var url = $(this).attr("action");
     var data = $(this).serialize();
+    var deckId = $("#deck-id-hidden").text();
+
+    function updateProgress(){
+      $.ajax({
+        type: "GET",
+        url: ('/decks/' + deckId),
+        dataType: "html",
+        success: function(response){
+          // var complete = response.complete;
+          // var total = response.total
+          // var percent = (complete / total) * 100;
+          // console.log(percent);  
+          $(".progress").html(response);
+        }
+      });
+    }
 
     $.ajax({
       type: "POST",
@@ -39,18 +47,9 @@ Author: <a href=""><%= @deck.user.email %></a>
           $("#card-" + response.card_id).css("background", "rgb(215, 85, 76)");
           $("#card-form-" + response.card_id).css("display", "none");
         }
+        updateProgress();
       }
     });
- 
-
-          // $(this).add('input[type=submit]').css("display", "none");
-
-
-    // $.post(url, data, function(serverResponse, status, request){
-    //   console.log(serverResponse)
-    // }).done(){
-
-    // }
   });
 </script>
 

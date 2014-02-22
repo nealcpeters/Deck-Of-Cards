@@ -1,0 +1,3 @@
+<div class="progress-bar"  role="progressbar" aria-valuenow="<%= @deck.percent_complete(@user) %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= @deck.percent_complete(@user) %>%">
+  <%= @deck.percent_complete(@user) %>% Complete
+</div>
