@@ -22,21 +22,20 @@ end
 post '/cards/:card_id/check' do
 	@user = current_user
   @card = Card.find(params[:card_id])
+  p session
   if @card.term.gsub(" ", "").downcase == params[:answer].gsub(" ", "").downcase
-  	a = Answer.create({
+  	Answer.create({
   		card_id: @card.id,
   		round_id: session[:round_id],
   		result: true
   		})
-  	p a
     return {value: true, card_id: @card.id}.to_json
   else
-  	a = Answer.create({
+  	Answer.create({
   		card_id: @card.id,
   		round_id: session[:round_id],
   		result: false
   		})
-  	p a
     return {value: false, card_id: @card.id}.to_json
   end
 end
