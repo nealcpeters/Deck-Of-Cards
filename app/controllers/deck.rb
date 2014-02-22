@@ -14,6 +14,25 @@ get '/decks/edit/:deck_id' do
   erb :'/deck_views/edit'
 end
 
+get '/decks/statistics/:deck_id' do
+  @all_rounds = current_user.all_stats(params[:deck_id])
+
+  erb :'/deck_views/stats'
+end
+
+get '/decks/new_round/:deck_id' do
+  @user = current_user
+  @deck = Deck.find(params[:deck_id])
+
+  @round = Round.create({
+    user_id: current_user.id,
+    deck_id: @deck.id
+    })
+  session[:round_id] = @round.id
+
+  redirect to ("/decks/#{@deck.id}")
+end
+
 get '/decks/:deck_id' do
   @user = current_user
   @deck = Deck.find(params[:deck_id])
@@ -32,9 +51,6 @@ get '/decks/:deck_id' do
   end
 end
 
-get '/decks/new_round' do
-
-end
 
 get '/decks/:deck_id/delete' do
 	@deck = Deck.find(params[:deck_id])
