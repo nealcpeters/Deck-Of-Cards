@@ -39,13 +39,24 @@ get '/decks/:deck_id/delete' do
 end
 
 post '/decks' do
-  @deck = Deck.create(params[:deck])
-  redirect to "/decks/edit/#{@deck.id}"
+  @deck = Deck.new(params[:deck])
+  if @deck.save
+    redirect to "/decks/edit/#{@deck.id}"
+  else
+    @errors = @deck.errors.messages
+    erb :"deck_views/new"
+  end
 end
 
 post '/decks/edit/:deck_id' do
-  Card.create(params[:card])
-  redirect to "/decks/edit/#{params[:deck_id]}"
+  @deck = Deck.where(id: params[:deck_id])[0]
+  card = Card.new(params[:card])
+  if card.save
+    redirect to "/decks/edit/#{params[:deck_id]}"
+  else
+    @errors = card.errors.messages
+    erb :'/deck_views/edit'
+  end
 end
 
 
