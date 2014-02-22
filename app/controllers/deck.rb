@@ -24,12 +24,16 @@ get '/decks/:deck_id' do
       })
     session[:round_id] = @round.id
   end
-  session[:round_id] = @user.rounds.where(deck_id: params[:deck_id]).first.id
+  session[:round_id] = @user.rounds.where(deck_id: params[:deck_id]).last.id
   if request.xhr?
     erb :"deck_views/_deck_progress_bar", layout: false
   else
     erb :'/deck_views/show'
   end
+end
+
+get '/decks/new_round' do
+
 end
 
 get '/decks/:deck_id/delete' do
