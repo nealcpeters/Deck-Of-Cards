@@ -25,9 +25,9 @@ Author: <a href=""><%= @deck.user.email %></a>
         dataType: "html",
         success: function(response){
           // var complete = response.complete;
-          // var total = response.total
+          // var total = response.total;
           // var percent = (complete / total) * 100;
-          // console.log(percent);  
+          // console.log(percent);
           $(".progress").html(response);
         }
       });
