@@ -14,7 +14,7 @@
       <p>Total Cards: <%= deck.total_cards %></p>
       <p>Correct: <%= deck.answered_correct(@user) %></p>
       <p>Incorrect: <%= deck.answered_incorrect(@user) %></p>
-      <% if deck.total_cards == deck.answered(current_user) %>
+      <% if deck.total_cards <= deck.answered(current_user) %>
         <a href="/decks/new_round/<%= deck.id %>">New Game</a>
       <% else %>
         <a href="/decks/<%= deck.id %>">Play Game</a>
@@ -36,7 +36,7 @@
   $(".percent-complete").each(function(index, data){
     var percent = $(data).text();
     console.log(percent);
-    if(percent === "100") {
+    if(percent >=  parseInt("100")) {
       $(this).parent().css("background", "#C4FFB0");
     }
   });
