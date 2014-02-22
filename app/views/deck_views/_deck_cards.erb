@@ -2,6 +2,7 @@
   <% @deck.cards.each do |card| %>
     <div class="col-xs-6 col-md-3 thumbnail card-<%= card.answer(session[:round_id]) %>" id="card-<%= card.id %>">
       <p><%= card.definition %></p>
+      <p id="term-<%= card.id %>"></p>
       <% if card.answered?(session[:round_id]) %>
         <form id="card-form-<%= card.id %>" class="card-check-form" action="/cards/<%= card.id %>/check" method="POST">
           <input style="display: none;" type="text" name="card_id" value="<%= card.id %>"></input>

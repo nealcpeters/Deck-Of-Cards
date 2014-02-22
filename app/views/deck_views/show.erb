@@ -46,6 +46,7 @@ Author: <a href=""><%= @deck.user.email %></a>
         else {
           $("#card-" + response.card_id).css("background", "rgb(215, 85, 76)");
           $("#card-form-" + response.card_id).css("display", "none");
+          $("#term-" + response.card_id).html(response.term);
         }
         updateProgress();
       }

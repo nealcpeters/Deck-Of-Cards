@@ -35,6 +35,6 @@ post '/cards/:card_id/check' do
   		round_id: session[:round_id],
   		result: false
   		})
-    return {value: false, card_id: @card.id}.to_json
+    return {value: false, card_id: @card.id, term: @card.term}.to_json
   end
 end
