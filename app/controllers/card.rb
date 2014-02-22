@@ -22,7 +22,6 @@ end
 post '/cards/:card_id/check' do
 	@user = current_user
   @card = Card.find(params[:card_id])
-  p session
   if @card.term.gsub(" ", "").downcase == params[:answer].gsub(" ", "").downcase
   	Answer.create({
   		card_id: @card.id,

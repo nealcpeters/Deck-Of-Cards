@@ -6,14 +6,14 @@ Author: <a href=""><%= @deck.user.email %></a>
   <% @deck.cards.each do |card| %>
     <div class="col-xs-6 col-md-3 thumbnail" id="card-<%= card.id %>">
       <p><%= card.definition %></p>
-      <form class="card-check-form" action="/cards/<%= card.id %>/check" method="POST">
-        <input style="display: none;" type="text" name="card_id" value="<%= card.id %>"></input>
-        <input type="text" name="answer"></input>
-        <% if card.answered?(@user) %>
-        <% else %>
+      <% if card.answered?(@user, session[:round_id]) %>
+        <form id="card-form-<%= card.id %>" class="card-check-form" action="/cards/<%= card.id %>/check" method="POST">
+          <input style="display: none;" type="text" name="card_id" value="<%= card.id %>"></input>
+          <input type="text" name="answer"></input>
           <input type="submit" value="Enter" class="btn btn-primary"></input>
-        <% end %>
-      </form>
+        </form>
+      <% else %>
+      <% end %>
     </div>
   <% end %>
 </div>
@@ -33,12 +33,18 @@ Author: <a href=""><%= @deck.user.email %></a>
       success: function(response){
         if(response.value === true) {
           $("#card-" + response.card_id).css("background", "rgb(95, 183, 87)");
+          $("#card-form-" + response.card_id).css("display", "none");
         }
         else {
           $("#card-" + response.card_id).css("background", "rgb(215, 85, 76)");
+          $("#card-form-" + response.card_id).css("display", "none");
         }
       }
     });
+ 
+
+          // $(this).add('input[type=submit]').css("display", "none");
+
 
     // $.post(url, data, function(serverResponse, status, request){
     //   console.log(serverResponse)
