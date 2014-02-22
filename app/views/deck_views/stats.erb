@@ -1,0 +1,13 @@
+<h1>stats</h1>
+
+<div class="row">
+  <% @all_rounds.each_with_index do |round, index| %>
+    <div class="col-xs-6 col-md-3 thumbnail">
+      <h2>Round: <%= index + 1 %></h2>
+      <p>Number Incorrect: <%= round.number_incorrect %></p>
+      <p>Number Correct: <%= round.number_correct %></p>
+      <p>Total Number: <%= round.total_number %></p>
+      <p>Percentage Correct: <%= round.percentage_correct %>%</p>
+    </div>
+  <% end %>
+</div>

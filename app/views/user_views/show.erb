@@ -15,18 +15,19 @@
       <p>Correct: <%= deck.answered_correct(@user) %></p>
       <p>Incorrect: <%= deck.answered_incorrect(@user) %></p>
       <% if deck.total_cards == deck.answered(current_user) %>
-        <a href="/decks/<%= deck.id %>">New Game</a>
+        <a href="/decks/new_round/<%= deck.id %>">New Game</a>
       <% else %>
         <a href="/decks/<%= deck.id %>">Play Game</a>
       <% end %>
-        <div class="progress progress-striped active">
-          <div class="progress-bar progress-bar-success" style="width: <%= deck.percent_correct(@user) %>%">
-            % correct
-          </div>
-          <div class="progress-bar progress-bar-warning" style="width: <%= deck.percent_incorrect(@user) %>%">
-            % incorrect
-          </div>
+      <div class="progress progress-striped active">
+        <div class="progress-bar progress-bar-success" style="width: <%= deck.percent_correct(@user) %>%">
+          % correct
         </div>
+        <div class="progress-bar progress-bar-warning" style="width: <%= deck.percent_incorrect(@user) %>%">
+          % incorrect
+        </div>
+      </div>
+      <a href="/decks/statistics/<%= deck.id %>" type="btn btn-primary">View Deck Statistics</a>
     </div>
   <% end %>
 </div>
