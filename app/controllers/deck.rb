@@ -18,7 +18,11 @@ end
 get '/decks/:deck_id' do
   @user = current_user
   @deck = Deck.find(params[:deck_id])
-  @round = Round.create
+  @round = Round.create({
+    user_id: current_user.id,
+    deck_id: @deck.id
+    })
+  session[:round_id] = @round.id
   erb :'/deck_views/show'
 end
 
