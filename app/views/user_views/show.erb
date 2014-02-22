@@ -8,16 +8,19 @@
 
 <div class="row">
   <% Deck.all.each do |deck| %>
-    <div class="col-xs-6 col-md-3">
+    <div class="col-xs-6 col-md-3 deck-results">
+      <p style="display: none;" class="percent-complete"><%= deck.percent_complete(@user) %></p>
       <a href="/decks/<%= deck.id %>" class="thumbnail">
         <h2><%= deck.title %></h2>
         <p>Total Cards: <%= deck.total_cards %></p>
         <p>Correct: <%= deck.answered_correct(@user) %></p>
         <p>Incorrect: <%= deck.answered_incorrect(@user) %></p>
-        <p>Percent complete: <%= deck.percent_complete(@user) %>%</p>
-        <div class="progress">
-          <div class="progress-bar" role="progressbar" aria-valuenow="<%= deck.percent_complete(@user) %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= deck.percent_complete(@user) %>%;">
-            <span class="sr-only"><%= deck.percent_complete(@user) %>% Complete</span>
+        <div class="progress progress-striped active">
+          <div class="progress-bar progress-bar-success" style="width: <%= deck.percent_correct(@user) %>%">
+            % correct           
+          </div>
+          <div class="progress-bar progress-bar-warning" style="width: <%= deck.percent_incorrect(@user) %>%">
+            % incorrect
           </div>
         </div>
       </a>
@@ -26,10 +29,11 @@
 </div>
 
 <script>
-
-  // $(".progress-bar").each(function)
-  $(".progress-bar").each( function(index, data){
-    console.log((data))
+  $(".percent-complete").each(function(index, data){
+    var percent = $(data).text();
+    console.log(percent);
+    if(percent === "100") {
+      $(this).next().css("background", "#C4FFB0");
+    }
   });
-  
 </script>

@@ -36,13 +36,31 @@ class Deck < ActiveRecord::Base
     	return 0 
     end
   end
+  
+  def percent_correct(user)
+    round = user.rounds.where(deck_id: self.id).first
+    if round
+      ((answered_correct(user) / total_cards.to_f) * 100).floor
+    else
+      return 0.to_f.round
+    end
+  end
+
+  def percent_incorrect(user)
+    round = user.rounds.where(deck_id: self.id).first
+    if round
+      ((answered_incorrect(user) / total_cards.to_f) * 100).floor
+    else
+      return 0.to_f.round
+    end
+  end
 
   def percent_complete(user)
     round = user.rounds.where(deck_id: self.id).first
     if round
-      (answered(user) / total_cards.to_f) * 100
+      ((answered(user) / total_cards.to_f) * 100).floor
     else
-      return 0.to_f
+      return 0.to_f.round
     end
   end
 end

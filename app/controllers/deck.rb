@@ -1,5 +1,4 @@
-require 'pry'
-require 'pry-nav'
+require 'json'
 
 get '/user/:user_id/decks' do
   @decks = current_user.decks
@@ -26,7 +25,17 @@ get '/decks/:deck_id' do
     session[:round_id] = @round.id
   end
   session[:round_id] = @user.rounds.where(deck_id: params[:deck_id]).first.id
-  erb :'/deck_views/show'
+  if request.xhr?
+    erb :"deck_views/_deck_progress_bar", layout: false
+  else
+    erb :'/deck_views/show'
+  end
+end
+
+get '/decks/:deck_id/delete' do
+	@deck = Deck.find(params[:deck_id])
+	@deck.destroy
+	redirect to "/user/#{current_user.id}/decks"
 end
 
 post '/decks' do
@@ -39,8 +48,5 @@ post '/decks/edit/:deck_id' do
   redirect to "/decks/edit/#{params[:deck_id]}"
 end
 
-get '/decks/:deck_id/delete' do
-	@deck = Deck.find(params[:deck_id])
-	@deck.destroy
-	redirect to "/user/#{current_user.id}/decks"
-end
+
+
