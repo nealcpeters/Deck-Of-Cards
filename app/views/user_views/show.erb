@@ -6,6 +6,10 @@
   <a class="btn btn-primary" href="/user/<%= current_user.id %>/decks">View my decks</a>
 </div>
 
+<div class="my-decks">
+  <a class="btn btn-primary" href="/decks/new">Create a Deck</a>
+</div>
+
 <div class="row">
   <% Deck.all.each do |deck| %>
     <div class="col-xs-6 col-md-3 deck-results">
@@ -17,7 +21,7 @@
         <p>Incorrect: <%= deck.answered_incorrect(@user) %></p>
         <div class="progress progress-striped active">
           <div class="progress-bar progress-bar-success" style="width: <%= deck.percent_correct(@user) %>%">
-            % correct           
+            % correct
           </div>
           <div class="progress-bar progress-bar-warning" style="width: <%= deck.percent_incorrect(@user) %>%">
             % incorrect
@@ -27,6 +31,8 @@
     </div>
   <% end %>
 </div>
+
+
 
 <script>
   $(".percent-complete").each(function(index, data){

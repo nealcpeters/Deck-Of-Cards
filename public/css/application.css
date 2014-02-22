@@ -44,10 +44,10 @@ th {
 }
 
 .navbar-default {
-  background-color: rgb(161, 161, 161);
+  background-color: rgb(34, 34, 34);
   border-color: #989898;
   border-radius: 0;
-  box-shadow: 10px 10px 5px #888888;
+  box-shadow: 1px 3px 12px #888888;
 }
 
 .navbar-default .navbar-brand {
@@ -63,7 +63,15 @@ th {
 }
 
 .dropdown-menu > li > a:hover {
-  background-color: #428bca;
+  /*background-color: #428bca;*/
+}
+
+.nav .navbar-nav .navbar-right .dropdown-toggle {
+  color: white;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+  color: white;
 }
 
 .card-false {
