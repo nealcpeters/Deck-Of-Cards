@@ -9,7 +9,10 @@ Author: <a href=""><%= @deck.user.email %></a>
       <form class="card-check-form" action="/cards/<%= card.id %>/check" method="POST">
         <input style="display: none;" type="text" name="card_id" value="<%= card.id %>"></input>
         <input type="text" name="answer"></input>
-        <input type="submit" value="Enter" class="btn btn-primary"></input>
+        <% if card.answered?(@user) %>
+        <% else %>
+          <input type="submit" value="Enter" class="btn btn-primary"></input>
+        <% end %>
       </form>
     </div>
   <% end %>
