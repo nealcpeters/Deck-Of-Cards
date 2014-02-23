@@ -1,0 +1,24 @@
+<div class="page-header">
+  <h1>Edit Your Card<small>Edit the term and description of your card:</small></h1>
+</div>
+
+<form id="edit_card" action="/decks/edit_card/<%= @card.id %>" method="POST">
+
+  <div class="input-group input-group-lg">
+    <span class="input-group-addon">Term:</span>
+    <input type="text" class="form-control" name="card[term]" value="<%= @card.term %>" placeholder="Title" >
+  </div>
+
+  <div class="input-group input-group-lg">
+    <span class="input-group-addon">Definition:</span>
+    <textarea form="edit_card" name="card[definition]" value="<%= @card.definition %>" rows="10" cols="50"><%= @card.definition %></textarea>
+  </div>
+
+  <input type="hidden" name="deck_id" value="<%=@deck.id%>">
+
+  <input type="submit" value="Save Card!" class="btn btn-primary">
+</form>
+
+<ul class="pager">
+  <li class="previous"><a href="/decks/edit/<%= @deck.id %>">Back &larr;</a></li>
+</ul>

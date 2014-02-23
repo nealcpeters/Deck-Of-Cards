@@ -5,6 +5,11 @@
     <p><a class="btn btn-primary btn-lg" role="button" href="/user/sign_in">Sign In</a></p>
     <p><a class="btn btn-primary btn-lg" role="button" href="/user/new">Create an Account</a></p>
   <% end %>
+  <% if current_user? %>
+    <p><a class="btn btn-primary btn-lg" role="button" href="/user/<%= current_user.id %>">All Decks</a></p>
+    <p><a class="btn btn-primary btn-lg" role="button" href="/user/<%= current_user.id %>/decks">My Decks</a></p>
+    <p><a class="btn btn-primary btn-lg" role="button" href="/decks/new">Create a Deck</a></p>
+  <% end %>
 </div>
 
 

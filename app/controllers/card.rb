@@ -6,16 +6,10 @@ get '/cards/:card_id/edit' do
 	erb :'card_views/edit'
 end
 
-post '/cards/:card_id/delete' do
+get '/cards/:card_id/delete' do
 	card = Card.find(params[:card_id])
-	@deck = card.decks.first
+	@deck = card.deck
 	card.destroy
-	erb :'deck_views/edit'
-end
-
-post '/cards/:card_id/edit' do
-	@card = Card.find(params[:card_id])
-	@card.update_attributes(params[:card])
 	erb :'deck_views/edit'
 end
 

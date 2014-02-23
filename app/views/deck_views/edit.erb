@@ -1,14 +1,22 @@
 <div class="page-header">
-  <h1>Edit Your Deck<small>Add new cards, do whateva you WANT okay?!:</small></h1>
+  <h1>Edit Your Deck<small>Add cards to your deck below:</small></h1>
 </div>
 
 <div id="existing_cards">
 	<%if @deck.cards.any?%>
 		<%@deck.cards.each do |card|%>
-			<%=card.term%>
-			<%=card.definition%>
-			<a href="/cards/<%=card.id%>/edit">Edit</a>
-			<a href="/cards/<%=card.id%>/delete">Delete</a>
+			<div class="row">
+		    <div class="col-sm-4 col-md-2">
+		      <div class="thumbnail">
+		        <div class="caption">
+		          <h3><%=card.term%></h3>
+		          <p><%=card.definition%></p>
+		          <p><a href="/cards/<%=card.id%>/edit" class="btn btn-primary" role="button">Edit</a>
+		          <a href="/cards/<%=card.id%>/delete" class="btn btn-danger" role="button">Delete</a></p>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
 		<%end%>
 	<%end%>
 </div>
@@ -23,12 +31,23 @@
 	  </div>
 
 	  <div class="input-group input-group-lg">
-	    <span class="input-group-addon">Description:</span>
+	    <span class="input-group-addon">Definition:</span>
 	    <textarea form="create_card" name="card[definition]" rows="10" cols="50"></textarea>
 	  </div>
 
 	  <input type="hidden" name="card[deck_id]" value="<%=@deck.id%>">
 
-	  <input type="submit" value="Make Your Card" class="btn default navbar-btn">
+	  <input type="submit" value="Make Card!" class="btn btn-primary">
 	</form>
 </div>
+
+<%if @deck.cards.any?%>
+	<div class="my-decks">
+	  <a class="btn btn-primary" href="/decks/<%=@deck.id%>">Play My Deck!</a>
+	</div>
+<% end %>
+
+<ul class="pager">
+  <li class="previous"><a href="/user/<%= current_user.id %>/decks">My Decks &larr;</a></li>
+</ul>
+

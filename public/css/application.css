@@ -81,3 +81,19 @@ th {
 .card-not-answered {
   background-color: #E6E6E6;
 }
+
+.caption h3, p {
+  text-align: center;
+}
+
+
+.btn-group {
+  position: relative;
+  left: 33%;
+}
+/*.btn.btn-primary.dropdown-toggle {
+  position: relative;
+  left: 100%;
+}
+*/
+

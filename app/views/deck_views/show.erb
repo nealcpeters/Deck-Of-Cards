@@ -8,6 +8,11 @@ Author: <a href=""><%= @deck.user.email %></a>
   <%= erb :"deck_views/_deck_progress_bar" %>
 </div>
 
+<ul class="pager">
+  <li class="previous"><a href="/user/<%=current_user.id %>">&larr; All Decks</a></li>
+</ul>
+
+
 <p id="deck-id-hidden" style="display: none;"><%= @deck.id %></p>
 
 <script type="text/javascript">

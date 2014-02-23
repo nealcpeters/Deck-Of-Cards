@@ -79,5 +79,25 @@ post '/decks/edit/:deck_id' do
   end
 end
 
+post '/decks/edit_card/:card_id' do
+  @deck = Deck.find(params[:deck_id])
+  @card = Card.find(params[:card_id])
+  if @card
+    @card.update(params[:card])
+    if @card.save
+      redirect to "/decks/edit/#{@deck.id}"
+    else
+      @errors = @card.errors.messages
+      p @errors
+      redirect to("/cards/#{@card.id}/edit")
+    end
+  else
+    @errors = {:Invalid=>["Incorrect Information"]}
+    redirect to("/cards/#{@card.id}/edit")
+  end
+end
+
+
+
 
 

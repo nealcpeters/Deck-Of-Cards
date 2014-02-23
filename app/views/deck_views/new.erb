@@ -16,5 +16,9 @@
 
   <input type="hidden" name="deck[user_id]" value="<%=current_user.id%>">
 
-  <input type="submit" value="Make Your Deck" class="btn default navbar-btn">
+  <input type="submit" value="Make Your Deck" class="btn btn-primary">
 </form>
+
+<ul class="pager">
+  <li class="previous"><a href="/user/<%=current_user.id%>/decks">My Decks &larr;</a></li>
+</ul>

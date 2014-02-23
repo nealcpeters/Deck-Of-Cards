@@ -1,13 +1,35 @@
 <div class="page-header">
-  <h1>Welcome, <%=current_user.email%>!<small>Here are all of the decks that you have created:</small></h1>
+  <h1><%=current_user.email%>'s decks<small>Here are all of the decks that you have created:</small></h1>
 </div>
 
 <div id="my_decks">
 	<%if current_user.decks.any?%>
 		<%current_user.decks.each do |deck|%>
-			<%=deck.title%>
-			<a href="/decks/edit/<%=deck.id%>">Edit</a>
-			<a href="/decks/<%=deck.id%>/delete">Delete</a>
+      <div class="row">
+        <div class="col-sm-4 col-md-2">
+          <div class="thumbnail">
+            <div class="caption">
+              <h3><%=deck.title%></h3>
+              <p><%=deck.description%></p>
+              <div class="btn-group">
+                  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    Options <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="/decks/edit/<%=deck.id%>">Edit</a></li>
+                    <li><a href="/decks/<%=deck.id%>/delete">Delete</a></li>
+                    <li class="divider"></li>
+                    <% if deck.total_cards <= deck.answered(current_user) %>
+                      <li><a href="/decks/new_round/<%= deck.id %>">New Game!</a></li>
+                    <% else %>
+                      <li><a href="/decks/<%= deck.id %>">Play Game!</a></li>
+                    <% end %>
+                  </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 		<%end%>
 	<%end%>
 </div>
@@ -15,3 +37,7 @@
 <div class="my-decks">
   <a class="btn btn-primary" href="/decks/new">Create a New Deck</a>
 </div>
+
+<ul class="pager">
+  <li class="previous"><a href="/user/<%= current_user.id %>">&larr; All Decks</a></li>
+</ul>
